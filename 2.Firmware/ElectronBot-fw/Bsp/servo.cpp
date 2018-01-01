@@ -1,6 +1,5 @@
-#include <string.h>
 #include "servo.h"
-
+#include "string.h"
 #define USE_OS_TOOLS
 
 #ifdef USE_OS_TOOLS
@@ -9,6 +8,7 @@
 #endif
 
 #ifdef USE_OS_TOOLS
+
 static SemaphoreHandle_t sema_i2c_tx;
 static SemaphoreHandle_t sema_i2c_rx;
 static void semp_i2c_init() {
@@ -83,10 +83,17 @@ void Servo::TransmitAndReceiveI2cPacket(uint8_t _id) {
     HAL_StatusTypeDef state = HAL_ERROR;
 
 #ifdef USE_OS_TOOLS
-	state = HAL_I2C_Master_Transmit_DMA(motorI2c, _id, i2cTxData, 5);
-	semp_i2c_tx_wait();
-	state = HAL_I2C_Master_Receive_DMA(motorI2c, _id, i2cRxData, 5);
-	semp_i2c_rx_wait();
+    if (_id == 1) {
+        state = HAL_I2C_Master_Transmit_DMA(headerMotorI2c, _id, i2cTxData, 5);
+        semp_i2c_tx_wait();
+        state = HAL_I2C_Master_Receive_DMA(headerMotorI2c, _id, i2cRxData, 5);
+        semp_i2c_rx_wait();
+    } else {
+        state = HAL_I2C_Master_Transmit_DMA(motorI2c, _id, i2cTxData, 5);
+        semp_i2c_tx_wait();
+        state = HAL_I2C_Master_Receive_DMA(motorI2c, _id, i2cRxData, 5);
+        semp_i2c_rx_wait();
+    }
 #else
 	uint32_t try_cnt = 0;
     do

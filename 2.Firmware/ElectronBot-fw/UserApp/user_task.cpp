@@ -1,8 +1,8 @@
 #include "common_inc.h"
-#include "audio.h"
+#include "robot.h"
 #include <math.h>
 
-Audio 	audio(&hi2s3, &hi2c3);
+Robot robot(&hspi1, &hi2s3, &hi2c3);
  
 #define PI (3.1415926535898f)
 #define	PCM_SAMP_NUM (882)
@@ -22,12 +22,17 @@ void generate_sin_16bit_double_channel(int16_t *pcm, uint32_t len, float fs_hz, 
 }
 
 void TaskAudioEntry(void) {
-	audio.Init();
+
+    osDelay(100);
+    robot.lcd->Init(Screen::DEGREE_0);
+    robot.lcd->SetWindow(0, 239, 0, 239);
+
+    robot.audio->Init();
 	osDelay(100);
 #if 1
 	generate_sin_16bit_double_channel(pcmsample_16bit,  PCM_SAMP_NUM, 44100, 500, 32768 / 2);
 	for (uint32_t i = 0; i < 300; i++) {
-		audio.WriteData(pcmsample_16bit, PCM_SAMP_NUM, true);
+        robot.audio->WriteData(pcmsample_16bit, PCM_SAMP_NUM, true);
 	}
 	float hz = 0;
 	float cycle = 0;
@@ -39,7 +44,7 @@ void TaskAudioEntry(void) {
 			num = cycle * 44100.0f;
 			__NOP();
 			generate_sin_16bit_double_channel(pcmsample_16bit, num,44100, i,32768 / 2);
-			audio.WriteData(pcmsample_16bit, num, true);
+            robot.audio->WriteData(pcmsample_16bit, num, true);
 		}
 		for (uint32_t i = 1000; i > 100; i-=2) {
 			hz = i;
@@ -47,7 +52,7 @@ void TaskAudioEntry(void) {
 			num = cycle * 44100.0f;		
 			__NOP();
 			generate_sin_16bit_double_channel(pcmsample_16bit, num,44100, i, 32768 / 2);
-			audio.WriteData(pcmsample_16bit, num, true);
+            robot.audio->WriteData(pcmsample_16bit, num, true);
 		}			
 	}
 #endif

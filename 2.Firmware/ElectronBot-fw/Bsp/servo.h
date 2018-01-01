@@ -5,7 +5,8 @@
 #include "i2c.h"
 
 class Servo {
-    public: Servo(I2C_HandleTypeDef* _motorI2c) : motorI2c(_motorI2c) {
+    public: Servo(I2C_HandleTypeDef* _headerMotorI2c, I2C_HandleTypeDef* _motorI2c) :
+        headerMotorI2c(_headerMotorI2c), motorI2c(_motorI2c) {
         /********* Need to adjust parameters for specific hardware *********/
         joint[0].id = 0;
         joint[0].angleMin = 0;
@@ -126,7 +127,7 @@ class Servo {
         joint[6].inverted = true;
 #endif
 
-    }	
+    }
 
     struct JointStatus_t {
         uint8_t id;
@@ -138,7 +139,6 @@ class Servo {
         bool inverted;
     };
     JointStatus_t joint[7];
-	JointStatus_t joint_dbg;
 
 	void Init(void);
 	
@@ -155,11 +155,13 @@ class Servo {
     void UpdateJointAngle(JointStatus_t &_joint);
     void UpdateJointAngle(JointStatus_t &_joint, float _angleSetPoint);
 	void TransmitAndReceiveI2cPacket(uint8_t _id);
+
+
 private:
+    I2C_HandleTypeDef* headerMotorI2c;
     I2C_HandleTypeDef* motorI2c;
     uint8_t i2cRxData[8];
     uint8_t i2cTxData[8];
-    //void TransmitAndReceiveI2cPacket(uint8_t _id);
 };
 
-#endif //ELECTRONBOT_FW_ROBOT_H
+#endif
