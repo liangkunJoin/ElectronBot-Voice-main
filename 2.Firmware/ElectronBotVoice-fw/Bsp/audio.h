@@ -7,8 +7,7 @@
 #include "i2s.h"
 
 class Audio {
-    public: explicit Audio(I2S_HandleTypeDef* _i2s, I2C_HandleTypeDef* _i2c) : i2s(_i2s), i2c(_i2c)
-    {
+    public: explicit Audio(I2S_HandleTypeDef* _i2s, I2C_HandleTypeDef* _i2c) : i2s(_i2s), i2c(_i2c) {
 		_isBusy = false;
 	}
 

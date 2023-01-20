@@ -22,13 +22,11 @@ static int32_t semp_i2s_tx_init() {
     }
 	return 0;
 }
-
 static void semp_i2s_tx_wait() {
 	if (sema_i2s_tx != NULL) {
 		xSemaphoreTake(sema_i2s_tx, portMAX_DELAY);
 	}
 }
-
 static void semp_i2s_tx_give() {
 	if (sema_i2s_tx != NULL) {
 		BaseType_t xHigherPriorityTaskWoken = pdFALSE;

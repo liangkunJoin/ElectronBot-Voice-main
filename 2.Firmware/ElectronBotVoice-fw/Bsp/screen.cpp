@@ -20,7 +20,6 @@ static int32_t semp_spi_init()
     }
 	return 0;
 }
-
 static void semp_spi_wait()
 {
 	if (sema_spi != NULL)
@@ -28,7 +27,6 @@ static void semp_spi_wait()
 		xSemaphoreTake(sema_spi, portMAX_DELAY);
 	}
 }
-
 static void semp_spi_give()
 {
 	if (sema_spi != NULL)
