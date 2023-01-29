@@ -4,7 +4,7 @@
 #include "robot.h"
 
 
-Robot robot(&hspi1, &hi2s3, &hi2c3);
+Robot robot(&hspi1, &hi2s3, &hi2c1, &hi2c3);
 float jointSetPoints[6];
 bool isEnabled = false;
 /* Thread Definitions -----------------------------------------------------*/

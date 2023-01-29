@@ -8,11 +8,11 @@
 
 
 class Robot {
-    public: explicit Robot(SPI_HandleTypeDef* _spi, I2S_HandleTypeDef* _i2s, I2C_HandleTypeDef* _i2c) :
-    spi(_spi), i2s(_i2s), i2c(_i2c)
+    public: explicit Robot(SPI_HandleTypeDef* _spi, I2S_HandleTypeDef* _i2s, I2C_HandleTypeDef* _header_i2c, I2C_HandleTypeDef* _i2c) :
+    spi(_spi), i2s(_i2s), header_i2c(_header_i2c), i2c(_i2c)
     {
         lcd = new Screen(spi);
-        servo = new Servo(i2c);
+        servo = new Servo(header_i2c, i2c);
         audio = new Audio(i2s, i2c);
 	}
 
@@ -42,6 +42,7 @@ private:
 
     SPI_HandleTypeDef* spi;
 	I2S_HandleTypeDef* i2s;
+    I2C_HandleTypeDef* header_i2c;
 	I2C_HandleTypeDef* i2c;
 };
 
