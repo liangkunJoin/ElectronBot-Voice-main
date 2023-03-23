@@ -367,7 +367,7 @@ void Screen::ChipSelect(bool _enable) {
 }
 
 void Screen::Reset(bool _enable) {
-    _enable ? LCD_RES_GPIO_Port->BSRR = (uint32_t) LCD_RES_Pin << 16U : LCD_RES_GPIO_Port->BSRR = LCD_RES_Pin;
+    _enable ? LCD_RST_GPIO_Port->BSRR = (uint32_t) LCD_RST_Pin << 16U : LCD_RST_GPIO_Port->BSRR = LCD_RST_Pin;
 }
 
 void Screen::SetDataOrCommand(bool _isData) {
