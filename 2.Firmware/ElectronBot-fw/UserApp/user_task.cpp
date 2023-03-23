@@ -2,7 +2,7 @@
 #include "robot.h"
 #include <math.h>
 
-Robot robot(&hspi1, &hi2s3, &hi2c1, &hi2c3);
+extern Robot robot;
  
 #define PI (3.1415926535898f)
 #define	PCM_SAMP_NUM (882)
