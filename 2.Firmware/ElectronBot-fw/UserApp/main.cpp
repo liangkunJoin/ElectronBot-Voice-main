@@ -15,6 +15,11 @@ bool isEnabled = false;
 /* Default Entry -------------------------------------------------------*/
 void Main(void)
 {
+    while (true) {
+        printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
+               jointSetPoints[0], jointSetPoints[1], jointSetPoints[2],
+               jointSetPoints[3], jointSetPoints[4], jointSetPoints[5]);
+    }
     HAL_Delay(2000);
     robot.lcd->Init(Screen::DEGREE_0);
     robot.lcd->SetWindow(0, 239, 0, 239);
@@ -26,9 +31,6 @@ void Main(void)
     robot.servo->UpdateJointAngle(robot.servo->joint[5], 0);
     robot.servo->UpdateJointAngle(robot.servo->joint[6], 0);
 
-    printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
-           jointSetPoints[0], jointSetPoints[1], jointSetPoints[2],
-           jointSetPoints[3], jointSetPoints[4], jointSetPoints[5]);
 
     float t = 0;
     while (true) {
