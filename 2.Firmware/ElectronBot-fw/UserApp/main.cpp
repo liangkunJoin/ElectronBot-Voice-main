@@ -26,6 +26,10 @@ void Main(void)
     robot.servo->UpdateJointAngle(robot.servo->joint[5], 0);
     robot.servo->UpdateJointAngle(robot.servo->joint[6], 0);
 
+    printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
+           jointSetPoints[0], jointSetPoints[1], jointSetPoints[2],
+           jointSetPoints[3], jointSetPoints[4], jointSetPoints[5]);
+
     float t = 0;
     while (true) {
 #if 1

@@ -113,6 +113,8 @@ int main(void)
   /* Start scheduler */
   osKernelStart();
 
+    printf("\r\n Your name: ");
+
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
