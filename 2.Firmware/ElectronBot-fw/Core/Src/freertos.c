@@ -129,7 +129,7 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN StartDefaultTask */
 
     // Invoke cpp-version main().
-    // Main();
+    //  Main();
     audioTaskHandle  = osThreadNew(StartAudioTask, NULL,  &audioTask_attributes);
     vTaskDelete(defaultTaskHandle);
   /* USER CODE END StartDefaultTask */

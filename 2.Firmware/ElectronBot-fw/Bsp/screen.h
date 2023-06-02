@@ -7,7 +7,7 @@
 
 class Screen {
 
-    public: explicit Screen(SPI_HandleTypeDef* _spi) : spi(_spi)  {
+    public:explicit Screen(SPI_HandleTypeDef* _spi) : spi(_spi)  {
 		orientation = DEGREE_0;
 		colorMode = BIT_16;
 		isBusy = false;		
