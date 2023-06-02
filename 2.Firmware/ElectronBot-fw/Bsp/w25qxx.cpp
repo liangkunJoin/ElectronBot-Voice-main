@@ -37,7 +37,7 @@ static void sema_flash_spi_give()
         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
     }
 }
-extern "C" void screen_spi_tx_done()
+extern "C" void flash_spi_tx_done()
 {
     sema_flash_spi_give();
 }
