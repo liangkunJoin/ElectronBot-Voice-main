@@ -102,7 +102,7 @@ void HAL_I2S_MspInit(I2S_HandleTypeDef* i2sHandle)
 
     /* I2S3 DMA Init */
     /* SPI3_TX Init */
-    hdma_spi3_tx.Instance = DMA1_Stream5;
+    hdma_spi3_tx.Instance = DMA1_Stream7;
     hdma_spi3_tx.Init.Channel = DMA_CHANNEL_0;
     hdma_spi3_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_spi3_tx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -120,8 +120,8 @@ void HAL_I2S_MspInit(I2S_HandleTypeDef* i2sHandle)
     __HAL_LINKDMA(i2sHandle,hdmatx,hdma_spi3_tx);
 
     /* I2S3_EXT_RX Init */
-    hdma_i2s3_ext_rx.Instance = DMA1_Stream2;
-    hdma_i2s3_ext_rx.Init.Channel = DMA_CHANNEL_2;
+    hdma_i2s3_ext_rx.Instance = DMA1_Stream0;
+    hdma_i2s3_ext_rx.Init.Channel = DMA_CHANNEL_3;
     hdma_i2s3_ext_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_i2s3_ext_rx.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_i2s3_ext_rx.Init.MemInc = DMA_MINC_ENABLE;
