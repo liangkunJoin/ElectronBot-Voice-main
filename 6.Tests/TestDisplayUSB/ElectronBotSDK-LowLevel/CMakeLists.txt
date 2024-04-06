@@ -3,43 +3,39 @@ project(ElectronBotSDK-LowLevel)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# 可以将下面的路径单独添加到环境变量OpenCV_DIR
+set(OpenCV_DIR "D:\\tool\\opencv2\\opencv\\own-build\\install")
+
+set(OpenCV_LIBS opencv_core opencv_imgproc opencv_highgui opencv_imgcodecs)
+
+find_package(OpenCV REQUIRED)
+
 include_directories(
         src
         lib
-        D:\\Libraries\\Cpp\\OpenCV_lib\\include
-        D:\\Libraries\\Cpp\\Boost_lib\\include
+        ${OpenCV_INCLUDE_DIRS}
 )
 
-file(GLOB_RECURSE SOURCES
-        src/electron_low_level.cpp
-        )
+file(GLOB_RECURSE SOURCES src/electron_low_level.cpp)
 
 link_directories(
         lib
-        D:\\Libraries\\Cpp\\OpenCV_lib\\x64\\vc16\\lib
-        D:\\Libraries\\Cpp\\Boost_lib\\lib64-msvc-14.1
+        ${OpenCV_LIBS}
 )
 
-add_library(${PROJECT_NAME} SHARED
-        "src/electron_low_level.cpp"
-        )
+add_library(${PROJECT_NAME} SHARED "src/electron_low_level.cpp")
 
-add_executable(Sample
-        "src/sample.cpp"
-        )
+add_executable(Sample "src/sample.cpp")
 
-target_link_libraries(${PROJECT_NAME}
-        USBInterface
-        opencv_core348d.lib
-        opencv_imgcodecs348d.lib
-        opencv_imgproc348d.lib
-        opencv_videoio348d.lib
-        )
-
-target_link_libraries(Sample
+target_link_libraries(
         ${PROJECT_NAME}
-        opencv_core348d.lib
-        opencv_imgcodecs348d.lib
-        opencv_imgproc348d.lib
-        opencv_videoio348d.lib
+        USBInterface
+        ${OpenCV_LIBS}
+        )
+
+target_link_libraries(
+        Sample
+        ${PROJECT_NAME}
+        USBInterface
+        ${OpenCV_LIBS}
         )

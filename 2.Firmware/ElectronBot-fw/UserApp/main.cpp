@@ -15,6 +15,7 @@ bool isEnabled = false;
 /* Default Entry -------------------------------------------------------*/
 void Main(void)
 {
+    printf("ssssss");
 //    while (true) {
 //        printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
 //               jointSetPoints[0], jointSetPoints[1], jointSetPoints[2],

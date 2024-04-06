@@ -23,7 +23,7 @@ void ElectronLowLevel::SetImageSrc(const cv::Mat &_mat)
 {
     cv::Mat temp;
     resize(_mat, temp, cv::Size(240, 240));
-    cvtColor(temp, temp, CV_BGRA2RGB);
+    cvtColor(temp, temp, cv::COLOR_BGRA2RGB);
     std::memcpy(frameBufferTx[pingPongWriteIndex], temp.data, 240 * 240 * 3);
 }
 
@@ -32,7 +32,7 @@ void ElectronLowLevel::SetImageSrc(const string &_filePath)
 {
     cv::Mat temp = cv::imread(_filePath);
     resize(temp, temp, cv::Size(240, 240));
-    cvtColor(temp, temp, CV_BGRA2RGB);
+    cvtColor(temp, temp, cv::COLOR_BGRA2RGB);
     std::memcpy(frameBufferTx[pingPongWriteIndex], temp.data, 240 * 240 * 3);
 }
 

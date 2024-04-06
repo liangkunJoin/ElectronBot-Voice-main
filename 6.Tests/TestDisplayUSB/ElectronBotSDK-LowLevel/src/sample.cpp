@@ -25,8 +25,8 @@ int main()
         video >> frame;
         if (frame.empty())
             break;
-
-        robot.SetImageSrc(frame);
+        Mat src = imread("C:\\Users\\admin\\Desktop\\1.jpg"); /*图片 */
+        robot.SetImageSrc(src);
         robot.Sync();
     }
 

@@ -72,10 +72,15 @@ int16_t pcmsample_16bit[PCM_SAMP_NUM]{0xfe,0xff,0xfe,0xff,
 
 void TaskAudioEntry(void) {
     osDelay(100);
-    printf("åˆå§‹åŒ–ã€‚ã€‚ã€‚ audio start");
+    printf("³õÊ¼»¯¡£¡£¡£ audio start");
     robot.audio->Init();
-    printf("åˆå§‹åŒ–ã€‚ã€‚ã€‚ audio end");
+    printf("³õÊ¼»¯¡£¡£¡£ audio end");
 	osDelay(100);
-    robot.audio->WriteData(pcmsample_16bit, PCM_SAMP_NUM, true);
+    while(1) {
+        printf("³õÊ¼»¯¡£¡£¡£ audio end \n");
+        osDelay(1000);
+        robot.audio->WriteData(pcmsample_16bit, PCM_SAMP_NUM, true);
+    }
+
 }
  
