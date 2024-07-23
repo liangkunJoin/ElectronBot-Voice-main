@@ -1,3 +1,4 @@
+/*
 #include <cmath>
 #include "common_inc.h"
 #include "screen.h"
@@ -7,12 +8,18 @@
 Robot robot(&hspi1, &hi2s3, &hi2c1, &hi2c3);
 float jointSetPoints[6];
 bool isEnabled = false;
-/* Thread Definitions -----------------------------------------------------*/
+*/
+/* Thread Definitions -----------------------------------------------------*//*
 
 
-/* Timer Callbacks -------------------------------------------------------*/
 
-/* Default Entry -------------------------------------------------------*/
+*/
+/* Timer Callbacks -------------------------------------------------------*//*
+
+
+*/
+/* Default Entry -------------------------------------------------------*//*
+
 void Main(void)
 {
     printf("ssssss");
@@ -97,3 +104,4 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef* hspi) {
     robot.lcd->isBusy = false;
 }
 
+*/

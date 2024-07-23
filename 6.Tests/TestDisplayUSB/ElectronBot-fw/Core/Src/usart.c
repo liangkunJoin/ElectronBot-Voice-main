@@ -57,7 +57,6 @@ void MX_USART1_UART_Init(void)
   }
   /* USER CODE BEGIN USART1_Init 2 */
     RetargetInit(&huart1);
-
     HAL_UART_Receive_DMA(&huart1, rx_buffer, BUFFER_SIZE);
   /* USER CODE END USART1_Init 2 */
 

@@ -1,8 +1,12 @@
 #include "common_inc.h"
 #include "robot.h"
+#include "i2s.h"
 #include <math.h>
 
-extern Robot robot;
+extern Robot robot(&hspi1, &hi2s3, &hi2c1, &hi2c3);
+
+
+
  
 #define PI (3.1415926535898f)
 #define	PCM_SAMP_NUM (996)
@@ -72,14 +76,30 @@ int16_t pcmsample_16bit[PCM_SAMP_NUM]{0xfe,0xff,0xfe,0xff,
 
 void TaskAudioEntry(void) {
     osDelay(100);
-    printf("初始化。。。 audio start");
+    printf("初始化 audio start \r\n");
     robot.audio->Init();
-    printf("初始化。。。 audio end");
-	osDelay(100);
+    printf("初始化 audio end \r\n");
+    osDelay(100);
+    printf("数据传输 audio start \r\n");
+    robot.audio->WriteData(pcmsample_16bit, PCM_SAMP_NUM, true);
     while(1) {
-        printf("初始化。。。 audio end \n");
-        osDelay(1000);
-        robot.audio->WriteData(pcmsample_16bit, PCM_SAMP_NUM, true);
+        // 检查DMA传输状态
+        HAL_DMA_StateTypeDef state = HAL_DMA_GetState(hi2s3.hdmatx);
+        if (state == HAL_DMA_STATE_BUSY)
+        {
+            // DMA传输正在进行，执行其他任务
+            printf("数据传输中 \r\n");
+        }
+        else if (state == HAL_DMA_STATE_READY)
+        {
+            // DMA传输完成，准备下一轮传输
+            printf("数据传输完成 \r\n");
+        }
+        else
+        {
+            // 处理错误状态
+            // ...
+        }
     }
 
 }
