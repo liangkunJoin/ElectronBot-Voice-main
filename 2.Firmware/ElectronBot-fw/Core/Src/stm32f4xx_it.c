@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
+#include "stdio.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -337,7 +338,27 @@ void TIM8_TRG_COM_TIM14_IRQHandler(void)
 void DMA1_Stream7_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream7_IRQn 0 */
-
+    // 检查DMA传输状态
+    HAL_DMA_StateTypeDef state = HAL_DMA_GetState(&hdma_spi3_tx);
+    if (state == HAL_DMA_STATE_BUSY)
+    {
+        // DMA传输正在进行，执行其他任务
+        printf("数据传输中 \r\n");
+    }
+    else if (state == HAL_DMA_STATE_TIMEOUT)
+    {
+        // DMA传输完成，准备下一轮传输
+        printf("数据传输超时 \r\n");
+    }
+    else if (state == HAL_DMA_STATE_READY)
+    {
+        // DMA传输完成，准备下一轮传输
+        printf("数据传输完成 \r\n");
+    }
+    else
+    {
+        printf(&"数据传输失败 \r\n" [ HAL_DMA_STATE_ERROR]);
+    }
   /* USER CODE END DMA1_Stream7_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_spi3_tx);
   /* USER CODE BEGIN DMA1_Stream7_IRQn 1 */
